@@ -1,8 +1,10 @@
 export default function Home() {
 "use client";
+
 import { Box, Container, Stack, Typography } from "@mui/material";
 import GameControls from "@/components/GameControls";
 export default function HomePage() {
+  const [history, setHistory] = useState<GameHistoryItem[]>([]);
   return (
     <Box
       sx={{
@@ -15,6 +17,7 @@ export default function HomePage() {
       <Container maxWidth="md">
           <GameControls
           />
+        <HistoryTable history={history} />
       </Container>
     </Box>
   );
