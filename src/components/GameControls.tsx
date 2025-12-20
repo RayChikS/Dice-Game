@@ -9,12 +9,29 @@ import {
   Slider,
   Typography,
 } from "@mui/material";
+import { Condition } from "@/types/games";
+
+type Props = {
+  threshold: number;
+  condition: Condition;
+  onThresholdChange: (value: number) => void;
+  onConditionChange: (value: Condition) => void;
+  onPlay: () => void;
+};
+
 export default function GameControls({
+  threshold,
   condition,
+  onThresholdChange,
+  onConditionChange,
+  onPlay,
+}: Props) {
   return (
     <Box sx={{ width: 360, maxWidth: "100%", textAlign: "center" }}>
       <RadioGroup
         row
+        value={condition}
+        onChange={(e) => onConditionChange(e.target.value as Condition)}
         sx={{
           justifyContent: "center",
           mb: 2,
@@ -35,8 +52,10 @@ export default function GameControls({
 
       <Box sx={{ px: 2 }}>
         <Slider
+          value={threshold}
           min={0}
           max={100}
+          onChange={(_, v) => onThresholdChange(v as number)}
           valueLabelDisplay="on"
           sx={{
             color: "#8e24aa",
@@ -60,6 +79,7 @@ export default function GameControls({
       <Button
         variant="contained"
         fullWidth
+        onClick={onPlay}
         sx={{
           mt: 3,
           backgroundColor: "#8e24aa",
