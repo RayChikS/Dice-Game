@@ -11,6 +11,14 @@ import {
 } from "@mui/material";
 import { Condition } from "@/types/games";
 
+/**
+ * Параметри, які передаються у GameControls.
+ * - threshold: поточний поріг для порівняння;
+ * - condition: умова ("under" чи "over");
+ * - onThresholdChange: зворотній виклик для зміни порогу;
+ * - onConditionChange: зворотній виклик для зміни умови;
+ * - onPlay: функція, що викликається при натисканні на кнопку гри.
+ */
 type Props = {
   threshold: number;
   condition: Condition;
@@ -28,6 +36,7 @@ export default function GameControls({
 }: Props) {
   return (
     <Box sx={{ width: 360, maxWidth: "100%", textAlign: "center" }}>
+      {/* Радіогрупа для вибору умови: менше чи більше порогу */}
       <RadioGroup
         row
         value={condition}
@@ -50,11 +59,13 @@ export default function GameControls({
         />
       </RadioGroup>
 
+      {/* Блок з повзунком вибору порогу */}
       <Box sx={{ px: 2 }}>
         <Slider
           value={threshold}
           min={0}
           max={100}
+          // Передаємо нове значення порогу вгору
           onChange={(_, v) => onThresholdChange(v as number)}
           valueLabelDisplay="on"
           sx={{
@@ -66,6 +77,7 @@ export default function GameControls({
           }}
         />
 
+        {/* Підписи до мінімального та максимального значень повзунка */}
         <Box sx={{ display: "flex", justifyContent: "space-between", mt: 1 }}>
           <Typography variant="caption" color="text.secondary">
             0
